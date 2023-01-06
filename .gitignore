@@ -1,0 +1,8 @@
+/KiCad/ControllerConverterForSwitch-backups/
+/KiCad/production/
+/KiCad/fp-info-cache
+
+/firmware/.vscode/.cortex-debug.*.json
+/firmware/build/
+
+*.bak

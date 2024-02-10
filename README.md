@@ -19,6 +19,8 @@ Inputs are read in 1ms cycles, resulting in almost no input delay.
   This is useful when using an SNES controller with Nintendo Switch Online.
 * It is possible to use a SNES controller and a Wii controller at the same time.<BR>
   However, pressing left and right or up and down at the same time will be ignored.
+* The position of the sticks at the time the connection of the Wii controller is detected is considered neutral.<BR>
+  Do not tilt the sticks when plugging in the Wii controller or USB cable.
 
 ## How to Build Hardware
 

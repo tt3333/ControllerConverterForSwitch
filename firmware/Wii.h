@@ -11,6 +11,10 @@ class Wii
 {
 public:
 	uint16_t buttons;
+	uint8_t calib_lx;
+	uint8_t calib_ly;
+	uint8_t calib_rx;
+	uint8_t calib_ry;
 	uint8_t lx;
 	uint8_t ly;
 	uint8_t rx;
@@ -18,6 +22,7 @@ public:
 
 	void init();
 	bool setFormat();
+	bool calibrate();
 	bool getInput();
 
 private:

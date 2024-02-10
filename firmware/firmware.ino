@@ -15,6 +15,7 @@ static SNES snes;
 static Wii wii;
 
 static bool isWiiControllerInitialized = false;
+static bool isWiiControllerCalibrated = false;
 static volatile bool sendFlag = false;
 
 static const uint16_t snes_to_wii_buttons[] =
@@ -141,11 +142,17 @@ void loop1()
 
 	if (digitalRead(WII_DETECT_PIN) == HIGH)
 	{
+		// In case of a communication error, isWiiControllerInitialized becomes false and setFormat is called again.
+		// However, once calibration is successful, calibration is not performed until DETECT_PIN goes from LOW to HIGH again.
 		if (!isWiiControllerInitialized)
 		{
 			isWiiControllerInitialized = wii.setFormat();
 		}
-		if (isWiiControllerInitialized)
+		if (isWiiControllerInitialized && !isWiiControllerCalibrated)
+		{
+			isWiiControllerInitialized = isWiiControllerCalibrated = wii.calibrate();
+		}
+		if (isWiiControllerInitialized && isWiiControllerCalibrated)
 		{
 			digitalWrite(TEST_PIN, HIGH);
 			isWiiControllerInitialized = wii.getInput();
@@ -154,7 +161,7 @@ void loop1()
 	}
 	else
 	{
-		isWiiControllerInitialized = false;
+		isWiiControllerInitialized = isWiiControllerCalibrated = false;
 	}
 
 	sendFlag = true;

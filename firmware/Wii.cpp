@@ -49,6 +49,33 @@ bool Wii::setFormat()
 	return false;
 }
 
+bool Wii::calibrate()
+{
+	uint8_t buffer[4];
+
+	// In the Wii RetroPad Adapter (https://github.com/bootsector/wii-retropad-adapter) and its derivative projects,
+	// the first read after a data format change sends data in the format before the change.
+	// Therefore, dummy read once and then read again.
+	//
+	// Note that Classic Controller Pico (https://github.com/tt3333/ClassicControllerPico)
+	// is based on the Wii RetroPad Adapter, but version 1.0.1 fixes this issue.
+	if (readRegister(0x00, buffer, sizeof(buffer)) != sizeof(buffer))
+	{
+		return false;
+	}
+	if (readRegister(0x00, buffer, sizeof(buffer)) != sizeof(buffer))
+	{
+		return false;
+	}
+
+	calib_lx = buffer[0] - 0x80;
+	calib_rx = buffer[1] - 0x80;
+	calib_ly = buffer[2] - 0x80;
+	calib_ry = buffer[3] - 0x80;
+
+	return true;
+}
+
 bool Wii::getInput()
 {
 	// Read 10 bytes to be correctly recognized by RetroSpy.
@@ -61,10 +88,10 @@ bool Wii::getInput()
 	}
 
 	buttons = ~(buffer[7] << 8 | buffer[6]);
-	lx = buffer[0];
-	rx = buffer[1];
-	ly = 255 - buffer[2];
-	ry = 255 - buffer[3];
+	lx = buffer[0] - calib_lx;
+	rx = buffer[1] - calib_rx;
+	ly = 255 - buffer[2] + calib_ly;
+	ry = 255 - buffer[3] + calib_ry;
 
 	return true;
 }

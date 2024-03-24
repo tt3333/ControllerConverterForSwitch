@@ -74,7 +74,7 @@ USBコネクタ、トグルスイッチ、コントローラーのケーブル�
 * Wii用の延長ケーブルを半分に切り、メス側のケーブルをCN1に接続してください。
 * スーパーファミコン用の延長ケーブルを半分に切り、メス側のケーブルをCN2に接続してください。
 * CN3、TP1はファームウェアのデバッグ用なので、通常は何も接続する必要はありません。
-* Raspberry Pi PicoのBOOTSELボタンを押しながらUSBケーブルを接続し、firmware.ino.sf2を書き込んでください。
+* Raspberry Pi PicoのBOOTSELボタンを押しながらUSBケーブルを接続し、firmware.ino.uf2を書き込んでください。
 
 ![PCB](doc/PCB.png)
 ![assembly](doc/assembly.jpg)

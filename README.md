@@ -75,7 +75,7 @@ Make holes for USB connector, toggle switch, and controller cables.
 * Cut the extension cable for Wii in half and connect the female cable to CN1.
 * Cut the extension cable for SNES in half and connect the female cable to CN2.
 * CN3 and TP1 are for debugging firmware, so normally nothing needs to be connected.
-* While pressing the BOOTSEL button on the Raspberry Pi Pico, connect the USB cable and write the firmware.ino.sf2.
+* While pressing the BOOTSEL button on the Raspberry Pi Pico, connect the USB cable and write the firmware.ino.uf2.
 
 ![PCB](doc/PCB.png)
 ![assembly](doc/assembly.jpg)
